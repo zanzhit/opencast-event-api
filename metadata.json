@@ -1,0 +1,27 @@
+[
+        {
+          "flavor": "dublincore/episode",
+          "fields": [
+            {
+              "id": "title",
+              "value": "titleeeee"
+            },
+            {
+              "id": "subjects",
+              "value": ["John Clark", "Thiago Melo Costa"]
+            },
+            {
+              "id": "description",
+              "value": "A great description"
+            },
+            {
+              "id": "startDate",
+              "value": "2016-06-22"
+            },
+            {
+              "id": "startTime",
+              "value": "13:30:00Z"
+            }
+          ]
+        }
+      ]
