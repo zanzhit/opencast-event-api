@@ -22,14 +22,14 @@ func main() {
 		return
 	}
 
-	metadatas, presenters, shinobiFiles, err := parser.ParseCameras("//wsl$/Ubuntu/home/Shinobi/videos/vZLeZUNbaG", cameras)
+	camerasData, err := parser.ParseCameras("//wsl$/Ubuntu/home/Shinobi/videos/vZLeZUNbaG", cameras)
 	if err != nil {
 		log.Println("error parse cameras:", err)
 		return
 	}
 
-	for i := 0; i < len(metadatas); i++ {
-		respBody, err := request.SendMultipartRequest(presenters[i], acl, metadatas[i], processing, config)
+	for i := 0; i < len(camerasData); i++ {
+		respBody, err := request.SendMultipartRequest(camerasData[i], acl, processing, config)
 		if err != nil {
 			log.Println("error sending request", err)
 			return
@@ -39,7 +39,7 @@ func main() {
 
 		time.Sleep(time.Second * 1)
 
-		deleteRespStatus, err := request.DeleteVideo(config, shinobiFiles[i])
+		deleteRespStatus, err := request.DeleteVideo(config, camerasData[i].ShinobiFile)
 		if err != nil {
 			log.Println("error deleting Shinobi video", err)
 		}

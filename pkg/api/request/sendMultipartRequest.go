@@ -3,9 +3,11 @@ package request
 import (
 	"bytes"
 	"encoding/json"
+
+	"opencast/pkg/parser"
 )
 
-func SendMultipartRequest(presenter, acl, metadata, processing []byte, configWithPath []byte) ([]byte, error) {
+func SendMultipartRequest(cameraData parser.VideoData, acl, processing []byte, configWithPath []byte) ([]byte, error) {
 	var config config
 
 	err := json.Unmarshal(configWithPath, &config)
@@ -15,9 +17,9 @@ func SendMultipartRequest(presenter, acl, metadata, processing []byte, configWit
 
 	body := &bytes.Buffer{}
 	files := map[string][]byte{
-		"presenter":  presenter,
+		"presenter":  cameraData.Presenter,
 		"acl":        acl,
-		"metadata":   metadata,
+		"metadata":   cameraData.Metadata,
 		"processing": processing,
 	}
 
